@@ -7,11 +7,12 @@ const mongoose = require("mongoose");
 const productsRoute = require("./api/routes/products");
 const orderRoute = require("./api/routes/orders");
 
-const url = "mongodb://localhost:27017/node-shop";
-mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  `mongodb+srv://kakwiri:${process.env.MONGO_ATLAS_PW}@node-shop.gkf7qor.mongodb.net/?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+  }
+);
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
