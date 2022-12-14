@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Product = require("../../models/products");
+const Product = require("../../models/products"); // impoting schema
 
 const router = express.Router();
 
