@@ -33,22 +33,9 @@ router.post("/", (req, res, next) => {
     });
 });
 
-/* try {
-    let id = { _id: req.params.id };
-    const form = await Form.findById(id);
-    if (!form) {
-      return res.status(404).json({
-        success: false,
-        message: "Form not Found in the DB!",
-      });
-    }
-    return res.status(200).json({
-      success: true,
-      data: form,
-    }); */
-
+//get a single product based on ID
 router.get("/:productId", (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.productId;
   Product.findById(id)
     .exec()
     .then((doc) => {
