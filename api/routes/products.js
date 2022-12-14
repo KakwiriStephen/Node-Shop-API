@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
 const Product = require("../../models/products");
 
 const router = express.Router();
@@ -34,18 +33,31 @@ router.post("/", (req, res, next) => {
     });
 });
 
+/* try {
+    let id = { _id: req.params.id };
+    const form = await Form.findById(id);
+    if (!form) {
+      return res.status(404).json({
+        success: false,
+        message: "Form not Found in the DB!",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: form,
+    }); */
+
 router.get("/:productId", (req, res, next) => {
-  const id = req.params.productId;
-  if (id === "special") {
-    res.status(200).json({
-      message: "Yeaaaa password special",
-      id: id,
+  const id = req.params.id;
+  Product.findById(id)
+    .exec()
+    .then((doc) => {
+      res.status(200).json({ doc });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
     });
-  } else {
-    res.status(200).json({
-      message: "You passed an ID",
-    });
-  }
 });
 
 router.patch("/:productId", (req, res, next) => {
